@@ -3,7 +3,19 @@ from flask import Flask, Response, request
 app = Flask(__name__)
 
 # Obfuscated Luau script
-luau_script = '''--// fuck you skid 
+luau_script = '''local success, result = pcall(function()
+    local code = game:HttpGet("https://gist.githubusercontent.com/BigFella8/c4d60b102d0cb1e0a43688642aaef080/raw/9762d197335dfed765755629ff269a77da58e4b7/bleachhack.lua")
+    local func, err = loadstring(code)
+    if not func then
+        error("loadstring failed: " .. tostring(err))
+    end
+    if type(func) ~= "function" then
+        error("loadstring returned non-function: " .. type(func))
+    end
+    return func()
+end)
+
+--// fuck you skid 
 if getgenv().bleach then warn("Bleachhack is already executed") return end
 
 
